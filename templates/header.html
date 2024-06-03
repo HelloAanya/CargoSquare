@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'rere.png' %}" alt="Warehouse Logo">
+        </div>
+        <nav>
+            <!-- Right side of the header -->
+            <ul>
+                <li><a href="{% url 'user_signup' %}">User Signup</a></li>
+                <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main-content">
+          <section>
+            <img src="{% static 'gif.png' %}" alt="Background Image" class="background-image">
+            <div class="hero-content">
+              <h1>WELCOME TO YOUR CargoSquare</h1> 
+            </div>
+          </section>
+      </div>
+      <div class="about-section">
+        <h1>About Us </h1>
+        <p>CargoSquare is an ecommerce platform that enables businesses to sell products or services online. It provides sellers with a digital storefront to showcase their offerings, handles order management and payment processing, and offers tools for customer management and marketing. With features like product catalog management, payment processing, and analytics, CargoSquare streamlines the ecommerce process, allowing businesses to reach a wider audience and efficiently manage their online operations.</p>
+        
+      </div>
+      <div class="our-team">
+      <h2 style="text-align:center">Our Team</h2>
+      <div class="row">
+        <div class="column">
+          <div class="card">
+            <img src="{% static 'shawn.png' %}" alt="Jane" style="width:100%">
+            <div class="container">
+              <h2>Shawn Mendes</h2>
+              <p class="title">CEO & Founder</p>
+              <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+              <p>jane@example.com</p>
+              <p><button class="button">Contact</button></p>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="column">
+          <div class="card">
+            <img src="{% static 'taylor.png' %}" alt="Mike" style="width:100%">
+            <div class="container">
+              <h2>Mike Ross</h2>
+              <p class="title">Art Director</p>
+              <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+              <p>mike@example.com</p>
+              <p><button class="button">Contact</button></p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="column">
+          <div class="card">
+            <img src="{% static 'shawn.png' %}" alt="John" style="width:100%">
+            <div class="container">
+              <h2>John Doe</h2>
+              <p class="title">Designer</p>
+              <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+              <p>john@example.com</p>
+              <p><button class="button">Contact</button></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact">
+        <h3>Contact Us</h3>
+        <p>Ready to experience the CargoSquare difference for yourself? Contact us today to learn more about our services, request a demo, or discuss how we can tailor a solution to meet your specific needs. We're here to support you every step of
+          the way on your journey to success.</p>
+  </div>
+
+    <footer>
+      <div class="footer-content">
+          <div class="footer-section about">
+              <h2>Get in Touch</h2>
+              <p>Learn more about CargoSquare and our mission to revolutionize the logistics industry.</p>
+              <div class="contact">
+                  <span><i class="fas fa-envelope"></i> Email: info@cargosquare.com</span>
+                  <span><i class="fas fa-phone"></i> Phone: 9834567890</span>
+              </div>
+              <div class="socials">
+                <h2>Follow Us On</h2>
+                  <a href="#" class="fa fa-facebook"></a>
+                  <a href="#" class="fa fa-twitter"></a>
+                  <a href="#" class="fa fa-instagram"></a>
+                  <a href="#" class="fa fa-linkedin"></a>
+              </div>
+          </div>
+        </div>
+  
+        <div class="footer-bottom">
+          <div class="footer-section contact-form">
+              <h2>Ask Your Query</h2>
+              <form action="submit_form.php" method="post">
+                  <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
+                  <textarea name="message" class="text-input contact-input" placeholder="Your message..."></textarea>
+                  <button type="submit" class="btn btn-big contact-btn">
+                      <i class="fas fa-envelope"></i>
+                      Send
+                  </button>
+              </form>
+          </div>
+      </div>
+   
+      
+      <div class="footer-up">
+          &copy; 2024 CargoSquare. All rights reserved.
+      </div>
+  </footer>
+  
+</body>
+</html>
+
+
+
+
+

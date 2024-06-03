@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Search Results</title>
+</head>
+<body>
+    <h1>Product Search Results</h1>
+    <p>Name: {{ product.name }}</p>
+    <p>Quantity: {{ product.quantity }}</p>
+    <p>Specification: {{ product.specification }}</p>
+    
+    {% if product.quantity <= 5 %}
+        <p style='color: red;'>Restock needed!</p>
+    {% endif %}
+</body>
+</html>

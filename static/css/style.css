@@ -1,0 +1,353 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style for header */
+header {
+    background-color: #f8f9fa; /* Set background color */
+    padding: 10px; /* Add padding */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Align items vertically */
+    justify-content: space-between; /* Space between logo and navigation */
+}
+
+/* Style for logo */
+.logo img {
+    height: 50px;
+    border-radius: 50%; /* Use a border-radius of 50% for a circular shape */
+    border: 2px solid #007bff; /* Add a border with a color that contrasts well with the background */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Add a subtle shadow effect */
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+.logo img:hover {
+    transform: scale(1.1); /* Increase the size of the logo on hover */
+}
+
+/* Style for navigation */
+nav ul {
+    list-style-type: none; /* Remove default list style */
+    display: flex; /* Use flexbox for layout */
+}
+
+nav ul li {
+    margin-right: 20px; /* Add margin between navigation items */
+}
+
+nav ul li a {
+    text-decoration: none; /* Remove underline from links */
+    color: #121212; /* Set text color */
+    font-weight: bold; /* Make text bold */
+    padding: 10px 15px; /* Add padding to the links */
+    border-radius: 5px; /* Add border radius */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add smooth transition effect */
+}
+
+nav ul li a:hover {
+    background-color: #007bff; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+}
+
+/* Style for search box */
+.search-box {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    margin: 0 auto; /* Center horizontally */
+}
+
+.search-box input[type="text"] {
+    padding: 8px; 
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    margin-right: 10px; /* Add margin between input and button */
+}
+
+.search-box button {
+    padding: 8px 20px; /* Add padding */
+    background-color: #007bff; /* Set background color */
+    color: #fff; /* Set text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add border radius */
+    cursor: pointer; /* Add pointer cursor */
+}
+
+.search-box button:hover {
+    background-color: #0056b3; /* Change background color on hover */
+}
+
+
+.main-content {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Adjust the height as needed */
+    overflow: hidden; /* Ensure the background image does not overflow */
+}
+
+section {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.main-content section img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+
+.hero-content h1 {
+    font-size: 4rem; /* Increase font size for impact */
+    margin: 20px 0; /* Add some vertical margin for spacing */
+    text-align: center; /* Center align the text */
+    color: #007bff; /* Use a vibrant color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow for depth */
+    font-weight: bold; /* Emphasize the text */
+    letter-spacing: 2px; /* Add some letter spacing for better readability */
+    line-height: 1.2; /* Adjust line height for better spacing */
+    transition: all 0.3s ease; /* Add a smooth transition effect */
+}
+
+.hero-content h1:hover {
+    transform: scale(1.1); /* Scale the text on hover for an interactive effect */
+    color: #2e2f30; /* Change color on hover for visual feedback */
+}
+
+.about section h1 {
+    font-size: 2rem;;
+}
+
+  
+.column {
+    float: left;
+    width: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+  }
+  
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+  }
+  
+.about-section {
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: white;
+    font-size: 1.8rem;
+  }
+.about-section p{
+    padding-top: 40px;
+}
+  
+.container {
+    padding: 0 16px;
+  }
+  
+
+.title {
+    color: grey;
+  }
+  
+.button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+.button:hover {
+    background-color: #555;
+  }
+  
+@media screen and (max-width: 650px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+  }  
+
+/* Footer styles */
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 50px 20px;
+  }
+  
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+.footer-section {
+    flex: 1;
+  }
+  
+.footer-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    justify-content: right;
+    padding-top: 40px;
+  }
+  
+.footer-section p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+.contact h3 {
+    font-size: 2em;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 800px;  
+}
+
+.contact p {
+    font-size: 1.8rem;
+    text-align: center;
+    padding-bottom: 200px; 
+    
+}
+.contact span {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+
+.socials a {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+  
+  /* Form styles */
+  
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.text-input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 100%;
+    justify-content: right;
+  }
+.another footer-section contact-form  {
+    justify-content: right;
+}
+  
+.contact-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+.contact-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive styles */
+  
+ @media screen and (max-width: 768px) {
+.footer-content {
+      flex-direction: column;
+    }
+  
+.footer-section {
+      margin-bottom: 30px;
+    }
+  
+.socials {
+      margin-top: 20px;
+    }
+  }
+
+.our-team h2 {
+    font-size: 2rem;
+    padding-top: 30px;
+}
+.card img {
+    padding-top: 50px;
+}
+
+.footer-bottom {
+    float: right; 
+    bottom: 0;
+    right: 0px;
+    width: 300px; 
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    padding-top: 50px;
+}
+
+.footer-section.contact-form {
+    text-align: right;
+    
+}
+
+.footer-section.contact-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.footer-section.contact-form form {
+    text-align: right;
+}
+
+.text-input.contact-input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.text-input.contact-input:focus,
+textarea.contact-input:focus {
+    outline: none;
+    border-color: #007bff; 
+}
+
+.contact-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-btn:hover {
+    background-color: #a9439f;
+}
+.footer-up {
+    text-align: center;
+    color: #fff;
+    background-color: #333;
+    padding: 10px 20px; /* Adjust padding as needed */
+}
+
+
+

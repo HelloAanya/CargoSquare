@@ -1,0 +1,279 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse Management System</title>
+</head>
+<style>
+    
+
+body, h1, h2, ul, li, p, button, input, textarea {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    width:100%
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width:100%;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease;
+    padding: 10px;
+}
+
+nav ul li a:hover {
+    color: #ffd700; /* change the color on hover */
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="number"],
+form textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.background
+form button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #555;
+}
+
+ul {
+    list-style: none;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Styling for product list button */
+.product-button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.product-button:hover {
+    background-color: #3b88f4;
+}
+
+/* Styling for product list */
+.product-content {
+    display: none;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+/* Styling for the About section */
+#about {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+#about h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+   
+}
+
+#about p {
+    font-size: 20px;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#about ul {
+    margin-bottom: 20px;
+}
+
+#about ul li {
+    font-size: 20px;
+    line-height: 1.5;
+    color: #555;
+}
+.img background img {
+    width:100%'
+
+}
+
+</style>
+<body>
+    <header>
+        <h1>Warehouse Management System</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#product-management">Product Management</a></li>
+            <li><a href="{% url 'product_list' %}">Product list</a></li>
+            <li><a href="#product-search">Product Search</a></li>
+            <li><a href="{% url 'view_order_list' %}">View Order List</a></li>
+            <li><a href="#report-generation">Report Generation</a></li>
+            <li><a href="{% url 'header' %}">Logout</a></li>
+        </ul>
+    </nav>
+    
+    
+    <div id="product-management" class="section">
+        <img src="{% static 'kuku.png' %}" alt="Background Image" class="background-image">
+        <h2>Product Management</h2>
+        <button class="product-button" onclick="toggleContent('product-form')">Show Product Form</button>
+        <div id="product-form" class="product-content">
+            <form action="{% url 'add_product' %}" method="post">
+                {% csrf_token %}
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name"><br>
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity" id="quantity"><br>
+                <label for="specification">Specification:</label>
+                <textarea name="specification" id="specification"></textarea><br>
+                <button type="submit">Add Product</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="product-search" class="section">
+        <h2>Product Search</h2>
+        <button class="product-button" onclick="toggleContent('search-form')">Show Search Form</button>
+        <div id="search-form" class="product-content">
+            <form action="{% url 'search_product' %}" method="post">
+                {% csrf_token %}
+                <label for="search_query">Search by name or ID:</label>
+                <input type="text" name="search_query" id="search_query">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="view-order-list" class="section">
+        <h2>View Order List</h2>
+        <button class="product-button" onclick="toggleContent('order-list')">Show Order List</button>
+        <div id="order-list" class="product-content">
+            <p>Please click "View Order List" to load the order list.</p>
+            <button onclick="window.location.href='/view_order_list/'">Load Order List</button>
+        </div>
+    </div>
+
+   <!-- Add Report Generation Form -->
+   <div id="report-generation" class="section">
+    <h2>Report Generation</h2>
+    <form action="{% url 'generate_report' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Generate Report</button>
+    </form>
+</div>
+<div id="about" class="section">
+    <h2>About Us</h2>
+    <p>Welcome to your Warehouse Management System! We are dedicated to providing efficient solutions for managing your warehouse inventory.</p>
+    <p>Our system allows you to:</p>
+    <ul>
+        <li>Manage product inventory</li>
+        <li>Search for products</li>
+        <li>View and generate reports</li>
+        <li>And much more...</li>
+    </ul>
+</div>
+    <footer>
+        <p>&copy; 2024 Warehouse Solutions Inc.</p>
+    </footer>
+
+    <script>
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My E-commerce Website</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Main content styles */
+        main {
+            padding: 20px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .product h2 {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .product p {
+            margin-bottom: 10px;
+        }
+
+        .product button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product button:hover {
+            background-color: #555;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+        <div class="logo">
+            <h1>MyShop</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="{% url 'view_cart' %}">Cart</a></li>
+                <li><a href="{% url 'header' %}">Logout</a></li>
+                <li>
+                    <form action="{% url 'user_search' %}" method="GET">
+                        <input type="text" name="query" placeholder="Search products...">
+                        <button type="submit">Search</button>
+                    </form>
+                </li>
+               
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content section -->
+    <main>
+        <!-- Product listing section -->
+        <section class="products">
+            <div class="product">
+                <img src="{% static 'A.png' %}" alt="Product 1">
+                <h2>Gown</h2>
+                <p>Evening gown</p>
+                <p>Rs 3000</p>
+                <form method="post" action="{% url 'add_to_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="add_to_cart-button">Add to Cart</button>
+                </form>
+
+                <!-- Order Now button -->
+                <form method="post" action="{% url 'order_now' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="order_now-button">Order Now</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="{% static 'B.png' %}" alt="Product 2">
+                <h2>Kurta Set</h2>
+                <p>Beautiful kurta set</p>
+                <p>Rs 2500</p>
+                <form method="post" action="{% url 'add_to_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </form>
+
+                <!-- Order Now button -->
+                <form method="post" action="{% url 'order_now' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="order-now-button">Order Now</button>
+                </form>
+            </div>
+            
+            <div class="product">
+                <img src="{% static 'C.png' %}" alt="Product 3">
+                <h2>Valentino Bag</h2>
+                <p>Trendy bag in black</p>
+                <p>Rs 8000</p>
+                <form method="post" action="{% url 'add_to_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </form>
+
+                <!-- Order Now button -->
+                <form method="post" action="{% url 'order_now' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="order-now-button">Order Now</button>
+                </form>
+               
+            </div>
+            <div class="product">
+                <img src="{% static 'D.png' %}" alt="Product 4">
+                <h2>Valentino Bag</h2>
+                <p>Trendy bag in green</p>
+                <p>Rs 3000</p>
+                
+                <form method="post" action="{% url 'add_to_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </form>
+
+                <!-- Order Now button -->
+                <form method="post" action="{% url 'order_now' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="order-now-button">Order Now</button>
+                </form>
+               
+            </div>
+            <div class="product">
+                <img src="{% static 'E.png' %}" alt="Product 5">
+                <h2>Romper</h2>
+                <p>Comfortable romper</p>
+                <p>Rs 2200</p>
+
+                <form method="post" action="{% url 'add_to_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </form>
+
+                <!-- Order Now button -->
+                <form method="post" action="{% url 'order_now' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="order-now-button">Order Now</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="{% static 'F.png' %}" alt="Product 6">
+                <h2>Gown</h2>
+                <p>Stunning evening gown</p>
+                <p>Rs 3000</p>
+                <form method="post" action="{% url 'add_to_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </form>
+
+                <!-- Order Now button -->
+                <form method="post" action="{% url 'order_now' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="order-now-button">Order Now</button>
+                </form>
+               
+            </div>
+            <div class="product">
+                <img src="{% static 'G.png' %}" alt="Product 7">
+                <h2>Gown</h2>
+                <p>Chic evening gown</p>
+                <p>Rs 3000</p>
+                
+                <form method="post" action="{% url 'add_to_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </form>
+
+                <!-- Order Now button -->
+                <form method="post" action="{% url 'order_now' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="order-now-button">Order Now</button>
+                </form>
+               
+            </div>
+            <div class="product">
+                <img src="{% static 'H.png' %}" alt="Product 8">
+                <h2>Gown</h2>
+                <p>Elegant evening gown</p>
+                <p>Rs 3000</p>
+                <form method="post" action="{% url 'add_to_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </form>
+
+                <!-- Order Now button -->
+                <form method="post" action="{% url 'order_now' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="order-now-button">Order Now</button>
+                </form>
+                
+            </div>
+            <div class="product">
+                <img src="{% static 'I.png' %}" alt="Product 9">
+                <h2>Gown</h2>
+                <p>Stylish evening gown</p>
+                <p>Rs 3000</p>
+                
+                <form method="post" action="{% url 'add_to_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </form>
+
+                <!-- Order Now button -->
+                <form method="post" action="{% url 'order_now' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="order-now-button">Order Now</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="{% static 'J.png' %}" alt="Product 10">
+                <h2>Gown</h2>
+                <p>Gorgeous evening gown</p>
+                <p>Rs 3000</p>
+              
+                <form method="post" action="{% url 'add_to_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </form>
+
+                <!-- Order Now button -->
+                <form method="post" action="{% url 'order_now' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <button type="submit" class="order-now-button">Order Now</button>
+                </form>
+                
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer section -->
+    <footer>
+        <p>&copy; 2024 MyShop. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript to handle button click -->
+    <script>
+        document.querySelectorAll('.add-to-cart-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Get product details
+                const product = button.closest('.product');
+                const name = product.querySelector('h2').innerText;
+                const description = product.querySelector('p:nth-of-type(1)').innerText;
+                const price = product.querySelector('p:nth-of-type(2)').innerText;
+    
+                // Create a form to submit product details
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '{% url "add_to_cart" %}';
+    
+                // Create input fields for product details
+                const nameInput = document.createElement('input');
+                nameInput.type = 'hidden';
+                nameInput.name = 'name';
+                nameInput.value = name;
+                form.appendChild(nameInput);
+    
+                const descriptionInput = document.createElement('input');
+                descriptionInput.type = 'hidden';
+                descriptionInput.name = 'description';
+                descriptionInput.value = description;
+                form.appendChild(descriptionInput);
+    
+                const priceInput = document.createElement('input');
+                priceInput.type = 'hidden';
+                priceInput.name = 'price';
+                priceInput.value = price;
+                form.appendChild(priceInput);
+    
+                // Add CSRF token
+                const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                const csrfInput = document.createElement('input');
+                csrfInput.type = 'hidden';
+                csrfInput.name = 'csrfmiddlewaretoken';
+                csrfInput.value = csrfToken;
+                form.appendChild(csrfInput);
+    
+                // Append form to document and submit
+                document.body.appendChild(form);
+                form.submit();
+            });
+        });
+    </script>
+</body>
+</html>
+

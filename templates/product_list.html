@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px 0;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        li {
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            position: relative; 
+        }
+
+        li:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff5858;
+            color: #ffffff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background-color: #ff0000;
+        }
+        
+        .update-btn {
+            position: absolute;
+            top: 10px;
+            right: 150px;
+            background-color: #4CAF50;
+            color: #ffffff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .update-btn:hover {
+            background-color: #45a049;
+        }
+        .product-info {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .product-info:hover {
+            color: #00bcd4;
+        }
+        
+        #edit-form {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #edit-form input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #edit-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #edit-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product List</h1>
+    <ul id="product-list">
+        {% for product in products %}
+            <li id="product-{{ product.id }}">
+                <div class="product-info">{{ product.name }} - {{ product.quantity }}</div>
+                <button class="remove-btn">Remove</button>
+                <button class="update-btn">Update</button>
+
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <!-- Edit form -->
+    <div id="edit-form" style="display: none;">
+        <input type="text" id="edit-name" placeholder="Product Name"><br>
+        <input type="number" id="edit-quantity" placeholder="Quantity"><br>
+        <button id="save-btn">Save</button>
+    </div>
+ 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var removeButtons = document.querySelectorAll(".remove-btn");
+            var updateButtons = document.querySelectorAll(".update-btn");
+
+            removeButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    var listItem = this.closest("li");
+                    var productId = listItem.id.split("-")[1];
+                    listItem.remove();
+                    
+                    // Store each product id individually in localStorage to keep track of removed products
+                    var removedProducts = JSON.parse(localStorage.getItem('removedProducts')) || [];
+                    removedProducts.push(productId);
+                    localStorage.setItem('removedProducts', JSON.stringify(removedProducts));
+                });
+            });
+
+            // Check localStorage on page load and remove corresponding list items
+            var removedProducts = JSON.parse(localStorage.getItem('removedProducts')) || [];
+            removedProducts.forEach(function(productId) {
+                var listItem = document.getElementById('product-' + productId);
+                if (listItem) {
+                    listItem.remove();
+                }
+            });
+            
+            updateButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    var listItem = this.closest("li");
+                    var productInfo = listItem.querySelector(".product-info").innerText.split(" - ");
+                    var productName = productInfo[0];
+                    var productQuantity = productInfo[1];
+
+                    document.getElementById("edit-name").value = productName;
+                    document.getElementById("edit-quantity").value = productQuantity;
+
+                    document.getElementById("edit-form").style.display = "block";
+                });
+            });
+
+            document.getElementById("save-btn").addEventListener("click", function() {
+                var editedName = document.getElementById("edit-name").value;
+                var editedQuantity = document.getElementById("edit-quantity").value;
+
+                var listItem = document.querySelector("#product-list li");
+                var productId = listItem.id.split("-")[1];
+
+                listItem.querySelector(".product-info").innerText = editedName + " - " + editedQuantity;
+
+                // Store updated product info in local storage
+                localStorage.setItem('product-' + productId, JSON.stringify({ name: editedName, quantity: editedQuantity }));
+
+                // Hide the edit form after saving
+                document.getElementById("edit-form").style.display = "none";
+            });
+
+            // Populate list items with product info stored in local storage
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                if (key.startsWith('product-')) {
+                    var product = JSON.parse(localStorage.getItem(key));
+                    var productId = key.split("-")[1];
+                    var listItem = document.getElementById('product-' + productId);
+                    if (listItem) {
+                        listItem.querySelector(".product-info").innerText = product.name + " - " + product.quantity;
+                    }
+                }
+            }
+
+            // Check localStorage on page load and remove corresponding list items
+            var removedProducts = JSON.parse(localStorage.getItem('removedProducts')) || [];
+            removedProducts.forEach(function(productId) {
+                var listItem = document.getElementById('product-' + productId);
+                if (listItem) {
+                    listItem.remove();
+                }
+            });
+        });
+
+</script>
+</body>
+</html>

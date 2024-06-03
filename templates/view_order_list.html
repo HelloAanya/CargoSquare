@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order List</title>
+</head>
+<body>
+    <h2>Order List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Customer Name</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Product A</td>
+                <td>5</td>
+                <td>John Doe</td>
+                <td>123 Main Street</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Product B</td>
+                <td>3</td>
+                <td>Jane Smith</td>
+                <td>456 Elm Street</td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+    <button onclick="cancel()">Cancel</button>
+
+    <script>
+function cancel() {
+    console.log("Cancel button clicked");
+    window.location.href = "{% url 'admin_home' %}";
+}
+    </script>
+</body>
+</html>
