@@ -1,15 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
     <style>
         /* CSS styles for user signup form */
+        body {
+            background-image: url('{% static "bubble.png" %}');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif; /* Use your preferred font */
+        }
+
         .container {
             width: 400px;
             margin: 50px auto;
             padding: 30px;
-            background-color: #f9f9f9;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-image: url('{% static "bubble.png" %}');
+            background-size: cover;
+            background-position: center;
         }
 
         .container h2 {
@@ -95,7 +107,6 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required><br>
             <button type="submit">Sign Up</button>
-
         </form>
         <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p> 
     </div>

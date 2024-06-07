@@ -4,9 +4,10 @@ from django.contrib import messages
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 from difflib import SequenceMatcher
-from .models import Product, CartItem, Order
 from django.contrib.auth.models import User
-
+from django.http import HttpResponseBadRequest
+from .models import Product, Order
+from .models import Item  
 
 def header(request):
     return render(request, 'header.html')
@@ -143,39 +144,58 @@ def check_similarity(specification):
             similar_product = product
             
     return similar_product
-
-
 def view_cart(request):
-    cart_items = CartItem.objects.filter(user=request.user)
-    total_price = sum(item.product.price * item.quantity for item in cart_items)
-    return render(request, 'view_cart.html', {'cart_items': cart_items, 'total_price': total_price})
+    # Here you would fetch the items in the user's cart and display them
+    return render(request, 'view_cart.html')
+    
 
+def item_list(request):
+    items = Item.objects.all()
+    return render(request, 'item_list.html', {'items': items})
 
-def shop(request):
-    products = Product.objects.all()
-    context = {'products': products}
-    return render(request, 'shop.html', context)
+def add_to_cart(request):
+    if request.method == 'POST':
+        item_id = request.POST.get('item_id')
+        # Add logic to handle adding the item to the cart using the item_id
+        return redirect('view_cart')
+    else:
+        return HttpResponseBadRequest("Invalid request method")
+
 
 
 def order_now(request):
     if request.method == 'POST':
-        product_id = request.POST.get('product_id')
-        product = get_object_or_404(Product, id=product_id)
-        order = Order.objects.create(user=request.user, product=product)
-        messages.success(request, 'Ordered successfully.')
-        return redirect('shop')
-    return render(request, 'shop.html')
+        item_id = request.POST.get('item_id')
+        item_name = request.POST.get('item_name')
+        item_description = request.POST.get('item_description')
+        item_price = request.POST.get('item_price')
 
+        if item_id and item_name and item_description and item_price:
+            try:
+                # You can process the item details here if needed
+                # For example, you can save them to a database
+                # For now, let's just pass them to the shop.html template
+                return render(request, 'shop.html', {
+                    'latest_ordered_item': {
+                        'name': item_name,
+                        'description': item_description,
+                        'price': item_price
+                    }
+                })
+            except Item.DoesNotExist:
+                return HttpResponseBadRequest("Invalid item ID")
+        else:
+            return HttpResponseBadRequest("Incomplete item details")
+    else:
+        return HttpResponseBadRequest("Invalid request method")
+def shop(request):
+    # Retrieve a list of items from the database or any other source
+    items = Item.objects.all()
+    return render(request, 'shop.html', {'items': items})
 
-def add_to_cart(request):
-    if request.method == 'POST':
-        product_id = request.POST.get('product_id')
-        product = get_object_or_404(Product, id=product_id)
-        CartItem.objects.create(user=request.user, product=product, quantity=1)
-        messages.success(request, 'Added to cart successfully.')
-        return redirect('shop')
-    return redirect('shop')
+def product_list(request):
 
+    return render(request, 'index.html', {'products': Product.objects.all()})
 
 def user_search(request):
     if request.method == 'GET':

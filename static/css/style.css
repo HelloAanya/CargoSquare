@@ -1,4 +1,4 @@
-/* Reset default margin and padding */
+
 * {
     margin: 0;
     padding: 0;
@@ -107,7 +107,7 @@ section {
     font-size: 4rem; /* Increase font size for impact */
     margin: 20px 0; /* Add some vertical margin for spacing */
     text-align: center; /* Center align the text */
-    color: #007bff; /* Use a vibrant color */
+    color: #0c0c0c; /* Use a vibrant color */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow for depth */
     font-weight: bold; /* Emphasize the text */
     letter-spacing: 2px; /* Add some letter spacing for better readability */
@@ -117,7 +117,7 @@ section {
 
 .hero-content h1:hover {
     transform: scale(1.1); /* Scale the text on hover for an interactive effect */
-    color: #2e2f30; /* Change color on hover for visual feedback */
+    color: #1f82e4; /* Change color on hover for visual feedback */
 }
 
 .about section h1 {

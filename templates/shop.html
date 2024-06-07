@@ -1,35 +1,23 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
 </head>
 <body>
-    <h1>Shop</h1>
-    <main>
-        <section class="products">
-            {% for product in products %}
-            <div class="product {% if product == selected_product %}selected{% endif %}">
-                <h2>{{ product.name }}</h2>
-                <p>{{ product.description }}</p>
-                <p>Rs {{ product.price }}</p>
-                <form method="post" action="{% url 'add_to_cart' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="product_id" value="{{ product.id }}">
-                    <button type="submit" class="add_to_cart_button">Add to Cart</button>
-                </form>
-                <form method="post" action="{% url 'order_now' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="product_id" value="{{ product.id }}">
-                    <button type="submit" class="order-now-button">Order Now</button>
-                </form>
-            </div>
-            {% endfor %}
-        </section>
-    </main>
-    
+    <h1>Order Details</h1>
+    {% if latest_ordered_item %}
+    <p>Latest Ordered Item:</p>
+    <ul>
+        <li>Name: {{ latest_ordered_item.item.name }}</li>
+        <li>Description: {{ latest_ordered_item.item.description }}</li>
+        <li>Price: ${{ latest_ordered_item.item.price }}</li>
+        <!-- Add more details as needed -->
+    </ul>
+    {% else %}
+    <p>No item has been ordered yet.</p>
+    {% endif %}
 </body>
 </html>

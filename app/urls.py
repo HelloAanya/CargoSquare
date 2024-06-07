@@ -1,5 +1,6 @@
+# urls.py
 from django.urls import path
-from . import views 
+from . import views
 
 urlpatterns = [
     path('', views.header, name='header'),
@@ -13,12 +14,13 @@ urlpatterns = [
     path('remove_product/<int:product_id>/', views.remove_product, name='remove_product'),
     path('product_list/', views.product_list, name='product_list'),
     path('search/', views.search_product, name='search_product'),
-    path('order_now/', views.order_now, name='order_now'),
     path('generate_report/', views.generate_report, name='generate_report'),
     path('user/search/', views.user_search, name='user_search'), 
     path('add-to-cart/', views.add_to_cart, name='add_to_cart'),
     path('view_cart/', views.view_cart, name='view_cart'), 
     path('view_order_list/', views.view_order_list, name='view_order_list'),
     path('shop/', views.shop, name='shop'),
-    path('add-to-cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('item_list/', views.item_list, name='item_list'),
+    path('add-to-cart/<int:item_id>/', views.add_to_cart, name='add_to_cart'),
+    path('order-now/', views.order_now, name='order_now'),
 ]
